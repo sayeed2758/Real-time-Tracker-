@@ -1,0 +1,10 @@
+{
+  "name": "Screen Time • Life Time",
+  "short_name": "Screen Time",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f8fc",
+  "theme_color": "#5b5cf0",
+  "description": "A private, local screen-time impact dashboard by Shahid Sir.",
+  "icons": []
+}
