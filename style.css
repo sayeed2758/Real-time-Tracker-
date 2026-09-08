@@ -3,3 +3,97 @@
 body.dark{--bg:#0d0f1c;--card:#15182a;--text:#f3f4fb;--muted:#9297ac;--line:#282c40;--shadow:0 18px 50px #0004}body.dark .topbar{background:linear-gradient(var(--bg) 70%,transparent)}body.dark .icon-btn,body.dark input,body.dark .btn-secondary,body.dark .achievement{background:#1a1e32;color:#f3f4fb;border-color:#2a2e45}body.dark .stat small,body.dark .tip,body.dark .day-legend span,body.dark .history-day small{color:#a0a5b8}body.dark .day-bar,body.dark .progress{background:#2a2e40}
 @media(max-width:600px){.app-shell{padding:12px 11px 18px}.topbar{padding:8px 1px 13px}.brand-mark{width:43px;height:43px;border-radius:14px}.brand-wrap h1{font-size:21px}.icon-btn{width:42px;height:42px;border-radius:14px}.top-actions{gap:6px}.card{border-radius:24px;padding:22px;margin-bottom:13px}.gradient-card{padding:23px;min-height:315px}.gradient-card blockquote{font-size:27px}.hero-actions .btn{padding:13px 15px;font-size:14px}.stat-grid{gap:10px}.stat{padding:19px;border-radius:22px}.stat strong{font-size:26px;margin:16px 0 6px}.stat small{font-size:12px}.stat-head{font-size:10px}.form-grid.two{gap:10px}.timer{font-size:46px}.session-actions{display:grid;grid-template-columns:1fr}.session-actions .btn{width:100%}.dark-stats{gap:9px}.dark-stats strong{font-size:23px}.chart-wrap{height:205px}.achievement-grid{grid-template-columns:repeat(2,1fr)}.day-legend span{flex-basis:47%}.goal-numbers{gap:12px}.goal-numbers strong{font-size:25px}.modal-actions{flex-direction:column}.mini-brand{display:none}}
 .toast{position:fixed;left:50%;bottom:24px;z-index:40;transform:translate(-50%,20px);background:#202344;color:#fff;padding:13px 18px;border-radius:99px;box-shadow:0 14px 40px #0004;opacity:0;pointer-events:none;transition:.25s;font-weight:700;font-size:14px}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* === Premium App Header Refinement === */
+.topbar{
+  padding:10px 4px 16px;
+  background:transparent;
+  gap:14px;
+}
+.brand-wrap{
+  min-height:62px;
+  padding:7px 14px 7px 8px;
+  gap:11px;
+  border:1px solid rgba(255,255,255,.72);
+  background:rgba(255,255,255,.68);
+  border-radius:24px;
+  box-shadow:0 12px 34px rgba(60,48,140,.09);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.brand-mark{
+  width:48px;height:48px;border-radius:17px;
+  flex:0 0 48px;
+  box-shadow:0 10px 24px rgba(111,87,243,.30);
+}
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:5px;
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 12px 34px rgba(60,48,140,.09);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.icon-btn{
+  width:44px;height:44px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#ffffff,#f1f0fb);
+  border:1px solid rgba(224,223,240,.9);
+  color:#383a58;
+  box-shadow:0 7px 18px rgba(45,34,105,.08);
+  font-size:19px;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.icon-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(70,55,150,.14)}
+.icon-btn:active{transform:scale(.96)}
+
+/* Softer app-like cards: rounded, never boxy */
+.card{border-radius:28px}
+.stat{border-radius:25px}
+.btn{border-radius:999px}
+.btn.full{border-radius:18px}
+input{border-radius:16px}
+
+/* Hero controls should feel like mobile app controls */
+.hero-actions .btn{border-radius:999px}
+.hero-actions{gap:10px}
+
+body.dark .topbar{background:transparent}
+body.dark .brand-wrap,
+body.dark .top-actions{
+  background:rgba(21,24,42,.82);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 14px 36px rgba(0,0,0,.24);
+}
+body.dark .icon-btn{
+  background:linear-gradient(145deg,#20253d,#171b2e);
+  border-color:#2c3150;
+  color:#f4f5fb;
+}
+
+@media(max-width:600px){
+  .topbar{padding:7px 0 14px;gap:8px}
+  .brand-wrap{min-height:58px;padding:6px 11px 6px 7px;border-radius:22px;gap:9px;flex:1;min-width:0}
+  .brand-mark{width:46px;height:46px;flex-basis:46px;border-radius:16px}
+  .brand-wrap h1{font-size:20px;line-height:1}
+  .brand-wrap .eyebrow{font-size:10px;letter-spacing:.19em}
+  .top-actions{gap:5px;padding:4px;border-radius:22px;flex:0 0 auto}
+  .icon-btn{width:41px;height:41px;font-size:18px}
+  .card{border-radius:25px}
+  .stat{border-radius:23px}
+}
+
+@media(max-width:390px){
+  .brand-wrap{padding-right:8px}
+  .top-actions{gap:3px}
+  .icon-btn{width:38px;height:38px}
+  .brand-mark{width:43px;height:43px;flex-basis:43px}
+  .brand-wrap h1{font-size:18px}
+  .brand-wrap .eyebrow{font-size:9px}
+}
