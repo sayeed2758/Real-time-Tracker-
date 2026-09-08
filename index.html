@@ -1,146 +1,192 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#5b55f7" />
-<meta name="description" content="A private screen time and life time dashboard." />
-<link rel="manifest" href="manifest.webmanifest" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%235b55f7'/%3E%3Cpath d='M17 18h30v28H17z' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M23 25h18M23 32h18M23 39h11' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
-<title>Screen Time — Life Time</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<meta name="description" content="A private screen-time and life-time dashboard.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<title>Screen Time • Life Time</title>
 </head>
 <body>
-<div class="app-shell">
-  <header class="topbar">
-    <div class="brand-wrap">
-      <div class="brand-mark">◒</div>
-      <div>
-        <div class="eyebrow">SCREEN TIME</div>
-        <h1>Life Time</h1>
+<div class="app-shell" id="top">
+  <header class="app-header">
+    <div class="brand-block">
+      <div class="brand-icon" aria-hidden="true"><span>◒</span></div>
+      <div class="brand-copy">
+        <div class="brand-kicker">SCREEN TIME</div>
+        <div class="brand-title">Life Time</div>
+        <div class="brand-sub">Less Screen <span>•</span> More Life</div>
       </div>
     </div>
-    <div class="top-actions">
-      <button id="installBtn" class="icon-btn" type="button" title="Install app">⇩</button>
-      <button id="themeBtn" class="icon-btn" type="button" title="Toggle theme">◐</button>
-      <button id="settingsBtn" class="icon-btn" type="button" title="Settings">⚙</button>
+    <div class="header-date">
+      <div id="headerDate">Tue, Sep 8, 2026</div>
+      <strong id="headerClock">08:40 AM</strong>
+      <span><i></i> Stay focused</span>
+    </div>
+    <div class="header-actions">
+      <button class="top-action" id="installBtn" type="button" aria-label="Install app" title="Install app">⇩</button>
+      <button class="top-action" id="themeBtn" type="button" aria-label="Toggle theme" title="Toggle theme">◐</button>
+      <button class="top-action notify-action" id="notifyBtn" type="button" aria-label="Show focus tip" title="Focus tip">●</button>
+      <button class="top-action" id="settingsBtn" type="button" aria-label="Settings" title="Settings">⚙</button>
     </div>
   </header>
 
-  <main>
-    <section class="hero card gradient-card">
-      <div class="hero-top">
-        <div>
-          <span class="pill">● <span id="todayPill">Today</span></span>
-          <p class="date" id="dateLabel"></p>
+  <main class="dashboard">
+    <section class="hero-card">
+      <div class="hero-glow glow-a"></div><div class="hero-glow glow-b"></div>
+      <div class="scene scene-back"></div><div class="scene scene-mid"></div><div class="scene scene-front"></div>
+      <div class="hero-content">
+        <div class="hero-status-row">
+          <span class="today-badge"><b></b> Today</span>
+          <span class="hero-mini">PRIVATE • LOCAL</span>
         </div>
-        <div class="mini-brand">PRIVATE • LOCAL</div>
+        <div class="hero-date" id="heroDate">Tuesday, September 8</div>
+        <div class="thought-label">TODAY'S THOUGHT</div>
+        <blockquote id="quoteText">You do not need a perfect day. You need a deliberate next hour.</blockquote>
+        <div class="quote-source" id="quoteSource">— Focus Note</div>
+        <div class="hero-actions">
+          <button class="hero-btn hero-btn-primary" id="updateBtn"><span class="btn-dot">↗</span> Update Today</button>
+          <button class="hero-btn hero-btn-outline" id="shareQuoteBtn">⌯&nbsp; Share Thought</button>
+        </div>
       </div>
-      <div class="thought-label">TODAY'S THOUGHT</div>
-      <blockquote id="quoteText">Protect your attention today, and you protect your future.</blockquote>
-      <div class="quote-source" id="quoteSource">— Daily reminder</div>
-      <div class="hero-actions">
-        <button class="btn btn-glass" id="shareQuoteBtn">Share thought</button>
-        <button class="btn btn-white" id="updateBtn">Update today</button>
-      </div>
+      <div class="hero-note">A better you, every day</div>
     </section>
 
-    <section class="stat-grid">
-      <article class="stat card tint-purple"><div class="stat-head"><span>TODAY</span><span class="badge">SCREEN</span></div><strong id="todayStat">0h 00m</strong><small id="todaySub">Saved locally on this device</small></article>
-      <article class="stat card tint-blue"><div class="stat-head"><span>THIS WEEK</span><span>⌁</span></div><strong id="weekStat">0h 00m</strong><small id="weekSub">Average 0h / day</small></article>
-      <article class="stat card tint-pink"><div class="stat-head"><span>THIS MONTH</span><span>◷</span></div><strong id="monthStat">0h 00m</strong><small id="monthSub">0 tracked days</small></article>
-      <article class="stat card tint-orange"><div class="stat-head"><span>PER YEAR</span><span>↗</span></div><strong id="yearStat">0 days</strong><small>At this daily pace</small></article>
+    <section class="quick-stats">
+      <article class="quick-card q-purple">
+        <div class="quick-icon">▣</div><div class="quick-copy"><span>Today's Screen Time</span><strong id="todayStat">0h 00m</strong><small id="todaySub">Saved locally</small></div>
+      </article>
+      <article class="quick-card q-blue">
+        <div class="quick-icon">▥</div><div class="quick-copy"><span>This Week</span><strong id="weekStat">0h 00m</strong><small id="weekSub">Average 0.0h / day</small></div>
+      </article>
+      <article class="quick-card q-pink">
+        <div class="quick-icon">▦</div><div class="quick-copy"><span>This Month</span><strong id="monthStat">0h 00m</strong><small id="monthSub">0 tracked days</small></div>
+      </article>
+      <article class="quick-card q-gold">
+        <div class="quick-icon">★</div><div class="quick-copy"><span>Streak</span><strong id="streakQuick">0 days</strong><small id="streakSub">Keep going!</small></div>
+      </article>
     </section>
 
-    <section class="card input-card" id="dataSection">
-      <div class="section-head"><div><div class="eyebrow">YOUR DATA</div><h2>Today's screen time</h2></div><span class="metric-chip" id="inputPreview">0h 00m</span></div>
-      <div class="form-grid two">
-        <label>Hours<input id="hoursInput" type="number" min="0" max="24" step="1" inputmode="numeric" placeholder="5"></label>
-        <label>Minutes<input id="minutesInput" type="number" min="0" max="59" step="1" inputmode="numeric" placeholder="30"></label>
-      </div>
-      <div class="form-grid two compact-inputs">
-        <label>Your age <span>(optional)</span><input id="ageInput" type="number" min="1" max="120" placeholder="22"></label>
-        <label>Sleep / day <span>(optional)</span><input id="sleepInput" type="number" min="0" max="24" step="0.5" placeholder="7"></label>
-      </div>
-      <div class="form-grid one">
-        <label>Work / Study / productive time <span>(optional)</span><input id="workInput" type="number" min="0" max="24" step="0.5" placeholder="8"></label>
-      </div>
-      <div class="action-row"><button class="btn btn-primary full" id="saveBtn">Save today's time</button></div>
-      <p class="tip">Tip: check Android Digital Wellbeing / Screen Time and enter the total shown for today.</p>
+    <section class="grid-two">
+      <article class="panel panel-chart" id="statsSection">
+        <div class="panel-head"><div><span class="panel-kicker">YOUR WEEK</span><h2>7-Day Pulse</h2></div><span class="head-chip" id="weekChange">—</span></div>
+        <div class="chart-area"><div class="chart-grid-lines"><i></i><i></i><i></i><i></i></div><div class="bars" id="chartBars"></div></div>
+        <div class="panel-foot"><span><i class="legend-dot dot-violet"></i> Hours of screen time</span><b id="trackedDays">0 tracked</b></div>
+      </article>
+
+      <article class="panel panel-day">
+        <div class="panel-head"><div><span class="panel-kicker">YOUR 24 HOURS</span><h2>Where the day goes</h2></div><span class="head-chip">Total 24h</span></div>
+        <div class="day-bar"><span id="screenSegment"></span><span id="sleepSegment"></span><span id="workSegment"></span><span id="otherSegment"></span></div>
+        <div class="day-list">
+          <div><span><i class="legend-dot dot-pink"></i> Screen</span><b id="screenDay">0h</b><em id="screenPct">0%</em></div>
+          <div><span><i class="legend-dot dot-violet"></i> Sleep</span><b id="sleepDay">0h</b><em id="sleepPct">0%</em></div>
+          <div><span><i class="legend-dot dot-cyan"></i> Work / Study</span><b id="workDay">0h</b><em id="workPct">0%</em></div>
+          <div><span><i class="legend-dot dot-gray"></i> Other</span><b id="otherDay">24h</b><em id="otherPct">100%</em></div>
+        </div>
+      </article>
     </section>
 
-    <section class="card session-card">
-      <div class="section-head"><div><div class="eyebrow">LIVE SESSION</div><h2>Track time inside this app</h2></div><span class="metric-chip" id="sessionAdded">Added 0h 00m</span></div>
-      <div class="timer" id="timer">00:00:00</div>
-      <div class="session-actions"><button class="btn btn-secondary" id="sessionStart">Start session</button><button class="btn btn-secondary disabled" id="sessionStop" disabled>Stop & add</button></div>
-      <p class="tip">This measures only the time you keep this website open; it does not read your phone's system-wide usage.</p>
+    <section class="grid-two">
+      <article class="panel panel-input" id="dataSection">
+        <div class="panel-head"><div><span class="panel-kicker">YOUR DATA</span><h2>Today's screen time</h2></div><span class="head-chip" id="inputPreview">0h 00m</span></div>
+        <div class="input-grid">
+          <label>Hours<input id="hoursInput" type="number" min="0" max="24" step="1" inputmode="numeric" placeholder="5"></label>
+          <label>Minutes<input id="minutesInput" type="number" min="0" max="59" step="1" inputmode="numeric" placeholder="30"></label>
+        </div>
+        <div class="input-grid compact-inputs">
+          <label>Your age <small>optional</small><input id="ageInput" type="number" min="1" max="120" placeholder="22"></label>
+          <label>Sleep / day <small>optional</small><input id="sleepInput" type="number" min="0" max="24" step="0.5" placeholder="7"></label>
+        </div>
+        <label>Work / Study / productive time <small>optional</small><input id="workInput" type="number" min="0" max="24" step="0.5" placeholder="8"></label>
+        <button class="wide-btn" id="saveBtn">Save today's time <span>→</span></button>
+        <p class="helper">Check Android Digital Wellbeing / Screen Time and enter the total shown for today.</p>
+      </article>
+
+      <article class="panel panel-goal" id="goalSection">
+        <div class="panel-head"><div><span class="panel-kicker">YOUR GOAL</span><h2>Make a smaller target</h2></div><button class="text-btn" id="editGoalBtn">Edit</button></div>
+        <div class="goal-numbers"><div><strong id="goalCurrent">0h 00m</strong><span>Current</span></div><div class="arrow">→</div><div><strong id="goalValue">3h 30m</strong><span>Goal</span></div></div>
+        <div class="progress"><span id="goalProgress"></span></div>
+        <div class="goal-message" id="goalText">Set a goal to start your streak.</div>
+        <div class="goal-meta"><span>🔥 <b id="streakCount">0 days</b> under goal</span><span>★ <b id="recordSummary">Best day —</b></span></div>
+      </article>
     </section>
 
-    <section class="card dark-card big-picture">
-      <div class="eyebrow light">THE BIG PICTURE</div><h2>Your time, translated</h2>
-      <div class="dark-stats">
-        <div><strong id="perWeekHours">0.0h</strong><span>per week</span></div><div><strong id="perYearHours">0.0h</strong><span>per year</span></div>
-        <div><strong id="per10YearHours">0.0h</strong><span>per 10 years</span></div><div><strong id="lifeProjection">Add age</strong><span>projected life</span></div>
-      </div>
-      <p class="dark-note" id="bigNote">At this pace, your yearly screen time will appear here. Add your age for a longer-term projection.</p>
+    <section class="grid-two">
+      <article class="panel panel-big" id="insightsSection">
+        <div class="panel-head"><div><span class="panel-kicker">THE BIG PICTURE</span><h2>Your time, translated</h2></div><span class="insight-badge">Life view</span></div>
+        <div class="big-stats"><div><strong id="perWeekHours">0.0h</strong><span>per week</span></div><div><strong id="perYearHours">0.0h</strong><span>per year</span></div><div><strong id="per10YearHours">0h</strong><span>per 10 years</span></div><div><strong id="lifeProjection">Add age</strong><span>projected life</span></div></div>
+        <div class="big-note" id="bigNote">At this pace, your yearly screen time will appear here. Add your age for a longer-term projection.</div>
+      </article>
+
+      <article class="panel panel-whatif">
+        <div class="panel-head"><div><span class="panel-kicker">WHAT IF?</span><h2>Reduce your daily time</h2></div><span class="head-chip" id="whatIfValue">1h</span></div>
+        <input id="reduceRange" class="range" type="range" min="30" max="180" step="30" value="60">
+        <div class="range-scale"><span>30m</span><span>3h</span></div>
+        <div class="whatif-result"><div><strong id="reclaimDays">0.0</strong><span>days reclaimed / year</span></div><div><strong id="reclaimHours">0h</strong><span>hours reclaimed / year</span></div></div>
+        <div class="whatif-line">Small changes repeated daily create a surprisingly big life.</div>
+      </article>
     </section>
 
-    <section class="card chart-card">
-      <div class="section-head"><div><div class="eyebrow">7-DAY PULSE</div><h2>Your week</h2></div><span class="metric-chip" id="weekChange">—</span></div>
-      <div class="chart-wrap"><div id="chartBars" class="bars"></div></div>
-      <div class="legend"><span><i class="dot purple"></i> hours of screen time</span><span id="trackedDays">0 tracked</span></div>
+    <section class="grid-two">
+      <article class="panel panel-achievements">
+        <div class="panel-head"><div><span class="panel-kicker">YOUR MILESTONES</span><h2>Achievements</h2></div><span class="head-chip" id="achievementCount">0 / 6</span></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
+      </article>
+      <article class="panel panel-quote">
+        <div class="panel-head"><div><span class="panel-kicker">DAILY QUOTE</span><h2>Keep going</h2></div><button class="round-mini" id="refreshQuoteBtn" title="Another quote">↻</button></div>
+        <div class="quote-card"><div class="quote-mark">“</div><p id="sideQuote">Small steps each day lead to big results.</p><span>— Keep Going</span></div>
+      </article>
     </section>
 
-    <section class="card whatif-card">
-      <div class="section-head"><div><div class="eyebrow">WHAT IF?</div><h2>Reduce your daily time</h2></div><span class="metric-chip" id="whatIfValue">1h</span></div>
-      <input id="reduceRange" type="range" min="30" max="180" step="30" value="60" />
-      <div class="range-labels"><span>30m</span><span>3h</span></div>
-      <div class="whatif-grid"><div><strong id="reclaimDays">0.0</strong><span>days reclaimed / year</span></div><div><strong id="reclaimHours">0h</strong><span>hours reclaimed / year</span></div></div>
-    </section>
-
-    <section class="card day-card">
-      <div class="section-head"><div><div class="eyebrow">YOUR 24 HOURS</div><h2>Where the day goes</h2></div></div>
-      <div class="day-bar"><span id="screenSegment"></span><span id="sleepSegment"></span><span id="workSegment"></span><span id="otherSegment"></span></div>
-      <div class="day-legend"><span><i class="dot pink"></i> Screen <b id="screenDay">0h</b></span><span><i class="dot violet"></i> Sleep <b id="sleepDay">0h</b></span><span><i class="dot cyan"></i> Work / Study <b id="workDay">0h</b></span><span><i class="dot gray"></i> Other <b id="otherDay">24h</b></span></div>
-    </section>
-
-    <section class="card goal-card">
-      <div class="section-head"><div><div class="eyebrow">YOUR GOAL</div><h2>Make a smaller target</h2></div><button class="link-btn" id="editGoalBtn">Edit</button></div>
-      <div class="goal-numbers"><div><strong id="goalCurrent">0h 00m</strong><span>current</span></div><b>→</b><div><strong id="goalValue">3h 30m</strong><span>goal</span></div></div>
-      <div class="progress"><span id="goalProgress"></span></div><p id="goalText">Set a goal to start your streak.</p>
-      <div class="streak-row"><div><span class="flame">🔥</span><strong id="streakCount">0 day</strong><small> under goal</small></div><div id="recordSummary">Best day —</div></div>
-    </section>
-
-    <section class="card achievements-card">
-      <div class="section-head"><div><div class="eyebrow">YOUR MILESTONES</div><h2>Achievements</h2></div><span class="metric-chip" id="achievementCount">0 / 6</span></div>
-      <div class="achievement-grid" id="achievementGrid"></div>
-    </section>
-
-    <section class="card records-card">
-      <div class="section-head"><div><div class="eyebrow">HISTORY</div><h2>Recent days</h2></div><button class="link-btn" id="clearBtn">Clear</button></div>
-      <div id="historyList" class="history"></div>
+    <section class="grid-two">
+      <article class="panel panel-session">
+        <div class="panel-head"><div><span class="panel-kicker">LIVE SESSION</span><h2>Track time inside this app</h2></div><span class="head-chip" id="sessionAdded">Added 0h 00m</span></div>
+        <div class="session-timer" id="timer">00:00:00</div>
+        <div class="session-actions"><button class="soft-btn" id="sessionStart">Start session</button><button class="soft-btn disabled" id="sessionStop" disabled>Stop & add</button></div>
+        <p class="helper">This tracks only the time you keep this app open. It does not read system-wide phone usage.</p>
+      </article>
+      <article class="panel panel-history">
+        <div class="panel-head"><div><span class="panel-kicker">HISTORY</span><h2>Recent days</h2></div><button class="text-btn" id="clearBtn">Clear</button></div>
+        <div id="historyList" class="history-list"></div>
+      </article>
     </section>
   </main>
 
   <footer>Made With <span>❤️</span> By Shahid Sir</footer>
 </div>
 
+<nav class="bottom-nav" aria-label="Primary navigation">
+  <button class="nav-item active" data-target="top"><span>⌂</span><b>Home</b></button>
+  <button class="nav-item" data-target="statsSection"><span>▥</span><b>Stats</b></button>
+  <button class="nav-plus" id="quickAddBtn" aria-label="Update today's screen time">+</button>
+  <button class="nav-item" data-target="insightsSection"><span>◒</span><b>Insights</b></button>
+  <button class="nav-item" id="profileNav"><span>◉</span><b>Profile</b></button>
+</nav>
+
 <div id="modalBackdrop" class="modal-backdrop hidden">
-  <div class="modal card">
-    <div class="section-head"><div><div class="eyebrow">SETTINGS</div><h2>Personal setup</h2></div><button class="icon-btn close-modal" id="closeSettings">×</button></div>
-    <label>Daily goal <input id="goalInput" type="number" min="0" max="24" step="0.25"></label>
-    <label>Default sleep / day <input id="defaultSleep" type="number" min="0" max="24" step="0.5"></label>
-    <label>Default work / study <input id="defaultWork" type="number" min="0" max="24" step="0.5"></label>
-    <div class="modal-actions"><button class="btn btn-secondary" id="saveSettings">Save settings</button><button class="btn btn-danger" id="resetBtn">Reset all data</button></div>
-    <p class="tip">Your data is stored only in this browser on this device.</p>
+  <div class="modal-card">
+    <div class="modal-head"><div><span class="panel-kicker">SETTINGS</span><h2>Personal setup</h2></div><button class="close-btn" id="closeSettings">×</button></div>
+    <label>Daily goal<input id="goalInput" type="number" min="0" max="24" step="0.25"></label>
+    <label>Default sleep / day<input id="defaultSleep" type="number" min="0" max="24" step="0.5"></label>
+    <label>Default work / study<input id="defaultWork" type="number" min="0" max="24" step="0.5"></label>
+    <div class="modal-actions"><button class="wide-btn" id="saveSettings">Save settings</button><button class="danger-btn" id="resetBtn">Reset all data</button></div>
+    <p class="helper">Your data stays on this device in this browser.</p>
   </div>
 </div>
 
-<div id="updateModal" class="modal-backdrop hidden"><div class="modal card"><div class="section-head"><div><div class="eyebrow">UPDATE TODAY</div><h2>Enter today’s total</h2></div><button class="icon-btn" id="closeUpdate">×</button></div><div class="form-grid two"><label>Hours<input id="updateHours" type="number" min="0" max="24"></label><label>Minutes<input id="updateMinutes" type="number" min="0" max="59"></label></div><button class="btn btn-primary full" id="updateSave">Save update</button></div></div>
+<div id="updateModal" class="modal-backdrop hidden">
+  <div class="modal-card">
+    <div class="modal-head"><div><span class="panel-kicker">UPDATE TODAY</span><h2>Enter today's total</h2></div><button class="close-btn" id="closeUpdate">×</button></div>
+    <div class="input-grid"><label>Hours<input id="updateHours" type="number" min="0" max="24"></label><label>Minutes<input id="updateMinutes" type="number" min="0" max="59"></label></div>
+    <button class="wide-btn" id="updateSave">Save & refresh dashboard</button>
+  </div>
+</div>
 
-<script src="app.js" defer></script>
+<div id="tipBubble" class="tip-bubble hidden"><strong>Focus tip</strong><span id="tipText">Your next hour is still yours to choose.</span></div>
+<div class="toast" id="toast" aria-live="polite"></div>
+<script src="app.js"></script>
 </body>
 </html>
